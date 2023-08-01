@@ -1,28 +1,44 @@
 {
-    "transactions": [
-        {
-            "id": 1,
-            "description": "Desenvolvimento de Site",
-            "type": "income",
-            "category": "Venda",
-            "price": 1000,
-            "createdAt": "2023-07-31T17:49:08.555Z"
-        },
-        {
-            "id": 2,
-            "description": "Hamburguer",
-            "type": "outcome",
-            "category": "Alimentação",
-            "price": 140,
-            "createdAt": "2023-07-31T17:47:08.555Z"
-        },
-        {
-            "id": 3,
-            "description": "Ignite Rocketseat",
-            "type": "outcome",
-            "category": "Educação",
-            "price": 1980,
-            "createdAt": "2023-07-31T17:47:08.555Z"
-        }
-    ]
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Desenvolvimento de Site",
+      "type": "income",
+      "category": "Venda",
+      "price": 1000,
+      "createdAt": "2023-07-31T17:49:08.555Z"
+    },
+    {
+      "id": 2,
+      "description": "Hamburguer",
+      "type": "outcome",
+      "category": "Alimentação",
+      "price": 140,
+      "createdAt": "2023-07-31T17:47:08.555Z"
+    },
+    {
+      "id": 3,
+      "description": "Ignite Rocketseat",
+      "type": "outcome",
+      "category": "Educação",
+      "price": 1980,
+      "createdAt": "2023-07-31T17:47:08.555Z"
+    },
+    {
+      "description": "Cabelo",
+      "price": 35,
+      "type": "outcome",
+      "category": "Beleza",
+      "createdAt": "2023-08-01T11:17:50.945Z",
+      "id": 4
+    },
+    {
+      "description": "Whisky",
+      "price": 150,
+      "type": "outcome",
+      "category": "Bebida",
+      "createdAt": "2023-08-01T11:31:25.545Z",
+      "id": 5
+    }
+  ]
 }

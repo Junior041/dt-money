@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
+import { api } from '../lib/axios';
 
 interface Transaction {
   id: number;
@@ -9,9 +10,17 @@ interface Transaction {
   createdAt: string;
 }
 
+interface CreateTrasnactionInput {
+  description: string;
+  price: number;
+  category: string;
+  type: 'income' | 'outcome';
+}
+
 interface TransactionsContextType {
   transactions: Transaction[];
   fetchTransactions: (query?: string) => Promise<void>;
+  createTransactions: (data: CreateTrasnactionInput) => Promise<void>;
 }
 
 interface TransactionsProviderProps {
@@ -26,13 +35,26 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
   async function fetchTransactions(query?: string) {
-    const urlFetch = new URL('http://localhost:3000/transactions');
-    if (query) {
-      urlFetch.searchParams.append('q', query);
-    }
-    const response = await fetch(urlFetch);
-    const data = await response.json();
-    setTransactions(data);
+    const response = await api.get('/transactions', {
+      params: {
+        _sort: 'createdAt',
+        _order: 'desc',
+        q: query,
+      },
+    });
+    setTransactions(response.data);
+  }
+
+  async function createTransactions(data: CreateTrasnactionInput) {
+    const { description, price, type, category } = data;
+    const response = await api.post('/transactions', {
+      description,
+      price,
+      type,
+      category,
+      createdAt: new Date(),
+    });
+    setTransactions((state) => [...state, response.data]);
   }
 
   useEffect(() => {
@@ -40,7 +62,9 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
   }, []);
 
   return (
-    <TransactionsContext.Provider value={{ transactions, fetchTransactions }}>
+    <TransactionsContext.Provider
+      value={{ transactions, fetchTransactions, createTransactions }}
+    >
       {children}
     </TransactionsContext.Provider>
   );
